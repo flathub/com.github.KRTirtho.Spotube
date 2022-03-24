@@ -36,4 +36,4 @@ modules:
       - type: archive
         url: https://github.com/KRTirtho/spotube/releases/download/v2.0.0/Spotube-linux-x86_64.tar.xz
         dest: spotube
-        sha256: c8a773033b5ad9e16106ba7591764e0e5a59201069d8275339c75870cc7b83a9
+        sha256: 476cf0b94a72ad60b3def82dd66377e3236f11bf50c49b518ee2ec09caba26da
