@@ -1,39 +1,39 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/master/data/flatpak-manifest.schema.json
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
-runtime-version: "41"
+runtime-version: '41'
 sdk: org.gnome.Sdk
 command: spotube
 finish-args:
-  - --socket=fallback-x11
-  - --socket=wayland
-  - --socket=pulseaudio
-  - --share=network
-  - --share=ipc
-  - --device=dri
-  - --filesystem=xdg-download
-  - --talk-name=org.freedesktop.Notifications
+- --socket=fallback-x11
+- --socket=wayland
+- --socket=pulseaudio
+- --share=network
+- --share=ipc
+- --device=dri
+- --filesystem=xdg-download
+- --talk-name=org.freedesktop.Notifications
 modules:
-  - name: keybinder3
-    buildsystem: autotools
-    post-install:
-      - install -Dm644 COPYING /app/share/licenses/keybinder-3/COPYING
-    sources:
-      - type: archive
-        url: https://github.com/kupferlauncher/keybinder/releases/download/keybinder-3.0-v0.3.2/keybinder-3.0-0.3.2.tar.gz
-        sha256: e6e3de4e1f3b201814a956ab8f16dfc8a262db1937ff1eee4d855365398c6020
-  - name: spotube
-    buildsystem: simple
-    build-commands:
-      - install -Dm644 spotube/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
-      - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube %u" --set-icon=com.github.KRTirtho.Spotube
-      - install -Dm644 spotube/spotube-logo.png /app/share/icons/hicolor/128x128/apps/com.github.KRTirtho.Spotube.png
-      - install -Dm644 spotube/spotube.desktop /app/share/applications/com.github.KRTirtho.Spotube.desktop
-      - install -dm755 /app/bin /app/spotube
-      - cp -R spotube/ /app
-      - ln -s /app/spotube/spotube /app/bin/spotube
-    sources:
-      - type: archive
-        url: https://github.com/KRTirtho/spotube/releases/download/v2.0.0/Spotube-linux-x86_64.tar.xz
-        dest: spotube
-        sha256: 476cf0b94a72ad60b3def82dd66377e3236f11bf50c49b518ee2ec09caba26da
+- name: keybinder3
+  buildsystem: autotools
+  post-install:
+  - install -Dm644 COPYING /app/share/licenses/keybinder-3/COPYING
+  sources:
+  - type: archive
+    url: https://github.com/kupferlauncher/keybinder/releases/download/keybinder-3.0-v0.3.2/keybinder-3.0-0.3.2.tar.gz
+    sha256: e6e3de4e1f3b201814a956ab8f16dfc8a262db1937ff1eee4d855365398c6020
+- name: spotube
+  buildsystem: simple
+  build-commands:
+  - install -Dm644 spotube/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
+  - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
+    %u" --set-icon=com.github.KRTirtho.Spotube
+  - install -Dm644 spotube/spotube-logo.png /app/share/icons/hicolor/128x128/apps/com.github.KRTirtho.Spotube.png
+  - install -Dm644 spotube/spotube.desktop /app/share/applications/com.github.KRTirtho.Spotube.desktop
+  - install -dm755 /app/bin /app/spotube
+  - cp -R spotube/ /app
+  - ln -s /app/spotube/spotube /app/bin/spotube
+  sources:
+  - type: archive
+    url: https://github.com/KRTirtho/spotube/releases/download/v2.1.0/Spotube-linux-x86_64.tar.xz
+    dest: spotube
+    sha256: f73a454026ff55f71115d0c31e0a092f75bc79d3988792a3646eff68faa19907
