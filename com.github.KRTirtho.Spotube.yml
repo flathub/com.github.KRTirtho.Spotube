@@ -1,6 +1,6 @@
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
-runtime-version: '42'
+runtime-version: '43'
 sdk: org.gnome.Sdk
 command: spotube
 finish-args:
@@ -31,4 +31,4 @@ modules:
   - type: archive
     url: https://github.com/KRTirtho/spotube/releases/download/v2.7.0/Spotube-linux-x86_64.tar.xz
     dest: spotube
-    sha256: 0429cb90c1f010b8d099ed5e5adfa802971e730075d37827439300379ec14d99
+    sha256: 0a9cf24b59b8ef3e3a5132ddfe9852b1741e7a0e062cef6464642df94c965f64
