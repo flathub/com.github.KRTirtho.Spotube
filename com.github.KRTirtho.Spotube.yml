@@ -143,6 +143,7 @@ modules:
         sources:
           - type: git
             url: https://git.ffmpeg.org/ffmpeg.git
+            tag: v0.6.1
 
   - name: spotube
     buildsystem: simple
