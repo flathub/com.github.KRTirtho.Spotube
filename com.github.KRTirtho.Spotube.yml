@@ -144,6 +144,7 @@ modules:
           - type: git
             url: https://git.ffmpeg.org/ffmpeg.git
             branch: release/6.0
+            commit: 3f345ebf215d96c03683373faa0414996da4d258
 
   - name: spotube
     buildsystem: simple
