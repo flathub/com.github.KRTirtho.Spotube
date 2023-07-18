@@ -29,6 +29,7 @@ modules:
     - "-Dmanpage=false"
     - "-Dvapi=false"
     - "-Dgtk_doc=false"
+    - "-Dintrospection=false"
     - "-Dtpm2=true"
     cleanup:
     - "/bin"
