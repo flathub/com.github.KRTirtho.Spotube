@@ -35,13 +35,14 @@ modules:
     - "/include"
     - "/lib/pkgconfig"
     - "/share/man"
+    config-opts:
+    - "-Dtpm2=true"
     sources:
     - type: git
       url: https://gitlab.gnome.org/GNOME/libsecret.git
       branch: master
       commit: 1b6ac89c0af59e39b65e24e4f1d6c7cf122f2645
 
-  
   - name: libnotify
     buildsystem: meson
     config-opts:
