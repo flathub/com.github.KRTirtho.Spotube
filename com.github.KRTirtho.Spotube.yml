@@ -157,6 +157,6 @@ modules:
       - type: archive
         dest: spotube
         url: https://github.com/KRTirtho/spotube/files/12610591/spotube-linux-3.1.1-aarch64.zip
-        sha256: ff63fe23e07b9379720a70931bc090436820bdb2370db1f3a101215ff217bb6f
+        sha256: 9ec28e49a1517013a0234986489f4733a5cbe04ac8821be3db93134289569dc2
         only-arches:
           - aarch64
