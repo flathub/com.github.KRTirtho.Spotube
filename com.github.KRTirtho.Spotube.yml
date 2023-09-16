@@ -156,7 +156,7 @@ modules:
           - x86_64
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/files/12610591/spotube-linux-3.1.1-aarch64.zip
-        sha256: 9ec28e49a1517013a0234986489f4733a5cbe04ac8821be3db93134289569dc2
+        url: https://github.com/KRTirtho/spotube/releases/download/nightly/spotube-linux-nightly-aarch64.tar.xz
+        sha256: add9a630d1f45d428cf8641fac6b8f48350b5a7b4a08a6a5d2052990c304b309
         only-arches:
           - aarch64
