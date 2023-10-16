@@ -16,7 +16,7 @@ finish-args:
   - --talk-name=org.freedesktop.secrets
   - --filesystem=xdg-documents
   - --filesystem=xdg-run/pipewire-0:ro
-  - --own-name=org.mpris.MediaPlayer2.spotube
+  - --own-name=org.mpris.MediaPlayer2.Spotube
 modules:
   - shared-modules/libappindicator/libappindicator-gtk3-12.10.json
   - shared-modules/libsecret/libsecret.json
@@ -98,7 +98,7 @@ modules:
         sources:
           - type: git
             url: https://code.videolan.org/videolan/x264.git
-            commit: 5a9dfddea49aae58fd18750d130301c947f7d217
+            commit: 5f84d403fcaf15b717a5d08d07e4411f0dcb0013
             x-checker-data:
               type: json
               url: https://code.videolan.org/api/v4/projects/536/repository/commits
