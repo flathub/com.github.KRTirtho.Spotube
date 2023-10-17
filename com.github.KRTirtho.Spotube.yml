@@ -16,7 +16,7 @@ finish-args:
   - --talk-name=org.freedesktop.secrets
   - --filesystem=xdg-documents
   - --filesystem=xdg-run/pipewire-0:ro
-  - --own-name=org.mpris.MediaPlayer2.Spotube
+  - --own-name=org.mpris.MediaPlayer2.Spotube.*
 modules:
 - shared-modules/libappindicator/libappindicator-gtk3-12.10.json
 - shared-modules/libsecret/libsecret.json
