@@ -18,137 +18,137 @@ finish-args:
   - --filesystem=xdg-run/pipewire-0:ro
   - --own-name=org.mpris.MediaPlayer2.Spotube.*
 modules:
-- shared-modules/libappindicator/libappindicator-gtk3-12.10.json
-- shared-modules/libsecret/libsecret.json
-- name: libnotify
-  buildsystem: meson
-  config-opts:
-  - -Dtests=false
-  - -Dintrospection=disabled
-  - -Dgtk_doc=false
-  - -Ddocbook_docs=disabled
-  sources:
-  - type: archive
-    url: https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.8.tar.xz
-    sha256: 69209e0b663776a00c7b6c0e560302a8dbf66b2551d55616304f240bba66e18c
-- name: jsoncpp
-  buildsystem: meson
-  config-opts:
-  - --default-library=shared
-  sources:
-  - type: git
-    url: https://github.com/open-source-parsers/jsoncpp
-    tag: 1.9.5
-- name: libmpv
-  cleanup:
-  - /include
-  - /lib/pkgconfig
-  - /share/man
-  buildsystem: simple
-  build-commands:
-  - python3 waf configure --prefix=/app --enable-libmpv-shared --disable-cplayer --disable-build-date
-    --disable-alsa
-  - python3 waf build
-  - python3 waf install
-  sources:
-  - type: git
-    url: https://github.com/mpv-player/mpv.git
-    tag: v0.35.1
-  - type: file
-    url: https://waf.io/waf-2.0.25
-    sha256: 21199cd220ccf60434133e1fd2ab8c8e5217c3799199c82722543970dc8e38d5
-    dest-filename: waf
-  modules:
-  - name: libass
-    cleanup:
-    - /include
-    - /lib/*.la
-    - /lib/pkgconfig
+  - shared-modules/libappindicator/libappindicator-gtk3-12.10.json
+  - shared-modules/libsecret/libsecret.json
+  - name: libnotify
+    buildsystem: meson
     config-opts:
-    - --disable-static
+      - -Dtests=false
+      - -Dintrospection=disabled
+      - -Dgtk_doc=false
+      - -Ddocbook_docs=disabled
     sources:
-    - type: archive
-      url: https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.xz
-      sha256: f0da0bbfba476c16ae3e1cfd862256d30915911f7abaa1b16ce62ee653192784
-    modules:
-    - name: fribidi
-      cleanup:
-      - /bin
+      - type: archive
+        url: https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.8.tar.xz
+        sha256: 69209e0b663776a00c7b6c0e560302a8dbf66b2551d55616304f240bba66e18c
+  - name: jsoncpp
+    buildsystem: meson
+    config-opts:
+      - --default-library=shared
+    sources:
+      - type: git
+        url: https://github.com/open-source-parsers/jsoncpp
+        tag: 1.9.5
+  - name: libmpv
+    cleanup:
       - /include
       - /lib/pkgconfig
-      - /lib/*.la
       - /share/man
-      buildsystem: meson
-      config-opts:
-      - --buildtype=release
-      - -Ddocs=false
-      sources:
+    buildsystem: simple
+    build-commands:
+      - python3 waf configure --prefix=/app --enable-libmpv-shared --disable-cplayer
+        --disable-build-date --disable-alsa
+      - python3 waf build
+      - python3 waf install
+    sources:
       - type: git
-        url: https://github.com/fribidi/fribidi.git
-        tag: v1.0.13
-        commit: b54871c339dabb7434718da3fed2fa63320997e5
-  - name: x264
-    cleanup:
-    - /include
-    - /lib/pkgconfig
-    - /share/man
-    config-opts:
-    - --disable-cli
-    - --enable-shared
+        url: https://github.com/mpv-player/mpv.git
+        tag: v0.35.1
+      - type: file
+        url: https://waf.io/waf-2.0.25
+        sha256: 21199cd220ccf60434133e1fd2ab8c8e5217c3799199c82722543970dc8e38d5
+        dest-filename: waf
+    modules:
+      - name: libass
+        cleanup:
+          - /include
+          - /lib/*.la
+          - /lib/pkgconfig
+        config-opts:
+          - --disable-static
+        sources:
+          - type: archive
+            url: https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.xz
+            sha256: f0da0bbfba476c16ae3e1cfd862256d30915911f7abaa1b16ce62ee653192784
+        modules:
+          - name: fribidi
+            cleanup:
+              - /bin
+              - /include
+              - /lib/pkgconfig
+              - /lib/*.la
+              - /share/man
+            buildsystem: meson
+            config-opts:
+              - --buildtype=release
+              - -Ddocs=false
+            sources:
+              - type: git
+                url: https://github.com/fribidi/fribidi.git
+                tag: v1.0.13
+                commit: b54871c339dabb7434718da3fed2fa63320997e5
+      - name: x264
+        cleanup:
+          - /include
+          - /lib/pkgconfig
+          - /share/man
+        config-opts:
+          - --disable-cli
+          - --enable-shared
+        sources:
+          - type: git
+            url: https://code.videolan.org/videolan/x264.git
+            commit: d46938dec10ceab74eb26d281d434fa284c7fbb9
+            x-checker-data:
+              type: json
+              url: https://code.videolan.org/api/v4/projects/536/repository/commits
+              commit-query: first( .[].id )
+              version-query: first( .[].id )
+              timestamp-query: first( .[].committed_date )
+      - name: nv-codec-headers
+        cleanup:
+          - '*'
+        no-autogen: true
+        make-install-args:
+          - PREFIX=/app
+        sources:
+          - type: git
+            url: https://github.com/FFmpeg/nv-codec-headers.git
+            commit: 855f8263d97bbdcaeabaaaa2997e1ccad7c52dc3
+      - name: ffmpeg
+        cleanup:
+          - /include
+          - /lib/pkgconfig
+          - /share/ffmpeg/examples
+        config-opts:
+          - --enable-shared
+          - --disable-static
+          - --enable-gnutls
+          - --disable-doc
+          - --disable-programs
+          - --disable-encoders
+          - --disable-muxers
+          - --enable-encoder=png
+          - --enable-libv4l2
+          - --enable-libdav1d
+        sources:
+          - type: git
+            url: https://git.ffmpeg.org/ffmpeg.git
+            branch: release/6.0
+            commit: c5039e158d20e85d4d8a2dee3160533d627b839a
+  - name: spotube
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 spotube/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
+      - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
+        %u" --set-icon=com.github.KRTirtho.Spotube
+      - install -Dm644 spotube/spotube-logo.png /app/share/icons/hicolor/128x128/apps/com.github.KRTirtho.Spotube.png
+      - install -Dm644 spotube/spotube.desktop /app/share/applications/com.github.KRTirtho.Spotube.desktop
+      - install -dm755 /app/bin /app/spotube
+      - cp -R spotube/ /app
+      - ln -s /app/spotube/spotube /app/bin/spotube
     sources:
-    - type: git
-      url: https://code.videolan.org/videolan/x264.git
-      commit: 5f84d403fcaf15b717a5d08d07e4411f0dcb0013
-      x-checker-data:
-        type: json
-        url: https://code.videolan.org/api/v4/projects/536/repository/commits
-        commit-query: first( .[].id )
-        version-query: first( .[].id )
-        timestamp-query: first( .[].committed_date )
-  - name: nv-codec-headers
-    cleanup:
-    - '*'
-    no-autogen: true
-    make-install-args:
-    - PREFIX=/app
-    sources:
-    - type: git
-      url: https://github.com/FFmpeg/nv-codec-headers.git
-      commit: 855f8263d97bbdcaeabaaaa2997e1ccad7c52dc3
-  - name: ffmpeg
-    cleanup:
-    - /include
-    - /lib/pkgconfig
-    - /share/ffmpeg/examples
-    config-opts:
-    - --enable-shared
-    - --disable-static
-    - --enable-gnutls
-    - --disable-doc
-    - --disable-programs
-    - --disable-encoders
-    - --disable-muxers
-    - --enable-encoder=png
-    - --enable-libv4l2
-    - --enable-libdav1d
-    sources:
-    - type: git
-      url: https://git.ffmpeg.org/ffmpeg.git
-      branch: release/6.0
-      commit: c5039e158d20e85d4d8a2dee3160533d627b839a
-- name: spotube
-  buildsystem: simple
-  build-commands:
-  - install -Dm644 spotube/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
-  - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
-    %u" --set-icon=com.github.KRTirtho.Spotube
-  - install -Dm644 spotube/spotube-logo.png /app/share/icons/hicolor/128x128/apps/com.github.KRTirtho.Spotube.png
-  - install -Dm644 spotube/spotube.desktop /app/share/applications/com.github.KRTirtho.Spotube.desktop
-  - install -dm755 /app/bin /app/spotube
-  - cp -R spotube/ /app
-  - ln -s /app/spotube/spotube /app/bin/spotube
-  sources:
-  - type: archive
-    dest: spotube
-    url: https://github.com/KRTirtho/spotube/releases/download/v3.2.0/spotube-linux-3.2.0-x86_64.tar.xz
-    sha256: 6ecf4d925657b1236c19a5e4a84a53cbbf77197dbebf9f5ae70f9738e82ca7c0
+      - type: archive
+        dest: spotube
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.2.0/spotube-linux-3.2.0-x86_64.tar.xz
+        sha256: 6ecf4d925657b1236c19a5e4a84a53cbbf77197dbebf9f5ae70f9738e82ca7c0
