@@ -98,7 +98,7 @@ modules:
         sources:
           - type: git
             url: https://code.videolan.org/videolan/x264.git
-            commit: a354f11f8f019a2a34ae7ef554ff07b31f0818f3
+            commit: 611b87b7a2a5c94f307cacc949c54b8e92bf25fa
             x-checker-data:
               type: json
               url: https://code.videolan.org/api/v4/projects/536/repository/commits
@@ -135,7 +135,7 @@ modules:
           - type: git
             url: https://git.ffmpeg.org/ffmpeg.git
             branch: release/6.0
-            commit: 2baff271a27957114ce798c54b6dc9a4851d316f
+            commit: c41ff724ede7da657762d61097e26fac296c53bf
   - name: spotube
     buildsystem: simple
     build-commands:
