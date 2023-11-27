@@ -98,7 +98,7 @@ modules:
         sources:
           - type: git
             url: https://code.videolan.org/videolan/x264.git
-            commit: a354f11f8f019a2a34ae7ef554ff07b31f0818f3
+            commit: c196240409e4d7c01b47448d93b1f9683aaa7cf7
             x-checker-data:
               type: json
               url: https://code.videolan.org/api/v4/projects/536/repository/commits
