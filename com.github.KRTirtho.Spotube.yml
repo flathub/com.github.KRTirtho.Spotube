@@ -135,7 +135,7 @@ modules:
           - type: git
             url: https://git.ffmpeg.org/ffmpeg.git
             branch: release/6.0
-            commit: c41ff724ede7da657762d61097e26fac296c53bf
+            commit: 133069b4340961a1b3e8562a0dabfc61b35af84c
   - name: spotube
     buildsystem: simple
     build-commands:
@@ -150,5 +150,5 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.2.0/spotube-linux-3.2.0-x86_64.tar.xz
-        sha256: 6ecf4d925657b1236c19a5e4a84a53cbbf77197dbebf9f5ae70f9738e82ca7c0
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.3.0/spotube-linux-3.3.0-x86_64.tar.xz
+        sha256: 8e63d7566600399267623129712a76511323705718423ffdd2f3ff61ade2a46c
