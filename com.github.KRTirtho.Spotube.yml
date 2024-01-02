@@ -4,15 +4,13 @@ runtime-version: '44'
 sdk: org.gnome.Sdk
 command: spotube
 finish-args:
-- --socket=fallback-x11
-- --socket=wayland
+- --socket=x11
 - --socket=pulseaudio
 - --share=network
 - --share=ipc
 - --device=dri
 - --filesystem=xdg-download
 - --talk-name=org.freedesktop.Notifications
-- --talk-name=org.kde.StatusNotifierWatcher
 - --talk-name=org.freedesktop.secrets
 - --filesystem=xdg-documents
 - --filesystem=xdg-run/pipewire-0:ro
