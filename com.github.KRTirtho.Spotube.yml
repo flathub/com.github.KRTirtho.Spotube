@@ -1,7 +1,7 @@
 app-id: com.github.KRTirtho.Spotube
-runtime: org.gnome.Platform
-runtime-version: '44'
-sdk: org.gnome.Sdk
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
 command: spotube
 finish-args:
 - --socket=fallback-x11
