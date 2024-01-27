@@ -150,5 +150,5 @@ modules:
   sources:
   - type: archive
     dest: spotube
-    url: https://github.com/KRTirtho/spotube/releases/download/v3.4.0/spotube-linux-3.4.0-x86_64.tar.xz
-    sha256: bd32b7696335025cb7c82344a504b4cbee1d1d38ec9f655624023d4a4e75f2b8 
+    url: https://github.com/KRTirtho/spotube/releases/download/v3.4.1/spotube-linux-3.4.1-x86_64.tar.xz
+    sha256: 5c875f0fa38b06164d4aaa2fa00aa9c09dd7e5d9cc52f36fdb1e6dd8d357d41f
