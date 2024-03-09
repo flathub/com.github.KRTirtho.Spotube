@@ -139,8 +139,7 @@ modules:
   - name: spotube
     buildsystem: simple
     build-commands:
-      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="3.5.0" date="2024-03-09" />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
-      - install -Dm644 spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
+      - install -Dm644 spotube/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
       - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
         %u" --set-icon=com.github.KRTirtho.Spotube
       - install -Dm644 spotube/spotube-logo.png /app/share/icons/hicolor/128x128/apps/com.github.KRTirtho.Spotube.png
@@ -153,8 +152,3 @@ modules:
         dest: spotube
         url: https://github.com/KRTirtho/spotube/releases/download/v3.5.0/spotube-linux-3.5.0-x86_64.tar.xz
         sha256: bb420085e03839fdd3b6f63b778e9d15c8117cb04652b7ec188c98d4ae37281a
-      - type: git
-        dest: spotube-src
-        url: https://github.com/KRTirtho/spotube
-        branch: master
-        commit: ca2b81d5720c79fcaaa545c990f8770243f0bf6a
