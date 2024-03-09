@@ -1,6 +1,6 @@
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
-runtime-version: '44'
+runtime-version: '45'
 sdk: org.gnome.Sdk
 command: spotube
 finish-args:
@@ -135,11 +135,12 @@ modules:
           - type: git
             url: https://git.ffmpeg.org/ffmpeg.git
             branch: release/6.0
-            commit: 133069b4340961a1b3e8562a0dabfc61b35af84c
+            commit: 511b8444232376db4b03edb4306a3c18995f0576
   - name: spotube
     buildsystem: simple
     build-commands:
-      - install -Dm644 spotube/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
+      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="3.5.0" date="2024-03-09" />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
+      - install -Dm644 spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
       - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
         %u" --set-icon=com.github.KRTirtho.Spotube
       - install -Dm644 spotube/spotube-logo.png /app/share/icons/hicolor/128x128/apps/com.github.KRTirtho.Spotube.png
@@ -150,5 +151,10 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.4.1/spotube-linux-3.4.1-x86_64.tar.xz
-        sha256: 5c875f0fa38b06164d4aaa2fa00aa9c09dd7e5d9cc52f36fdb1e6dd8d357d41f
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.5.0/spotube-linux-3.5.0-x86_64.tar.xz
+        sha256: bb420085e03839fdd3b6f63b778e9d15c8117cb04652b7ec188c98d4ae37281a
+      - type: git
+        dest: spotube-src
+        url: https://github.com/KRTirtho/spotube
+        branch: master
+        commit: ca2b81d5720c79fcaaa545c990f8770243f0bf6a
