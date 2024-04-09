@@ -98,7 +98,7 @@ modules:
         sources:
           - type: git
             url: https://code.videolan.org/videolan/x264.git
-            commit: 4815ccadb1890572f2bf8b9d9553d56f6c9122ad
+            commit: 7ed753b10a61d0be95f683289dfb925b800b0676
             x-checker-data:
               type: json
               url: https://code.videolan.org/api/v4/projects/536/repository/commits
@@ -135,11 +135,12 @@ modules:
           - type: git
             url: https://git.ffmpeg.org/ffmpeg.git
             branch: release/6.0
-            commit: 511b8444232376db4b03edb4306a3c18995f0576
+            commit: f9821fd9079e624d558b8ed5cbc8c0669ca7a4db
   - name: spotube
     buildsystem: simple
     build-commands:
-      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="3.5.0" date="2024-03-09" />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
+      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="3.5.0" date="2024-03-09"
+        />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
       - install -Dm644 spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
       - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
         %u" --set-icon=com.github.KRTirtho.Spotube
@@ -157,4 +158,4 @@ modules:
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
         branch: master
-        commit: ca2b81d5720c79fcaaa545c990f8770243f0bf6a
+        commit: 2abb5800be804a0ff42851e6dcab9e25dbb60f1c
