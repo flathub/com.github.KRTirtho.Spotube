@@ -4,53 +4,85 @@ runtime-version: '45'
 sdk: org.gnome.Sdk
 command: spotube
 finish-args:
-  - --socket=fallback-x11
-  - --socket=wayland
-  - --socket=pulseaudio
-  - --share=network
-  - --share=ipc
-  - --device=dri
-  - --filesystem=xdg-download
-  - --talk-name=org.freedesktop.Notifications
-  - --talk-name=org.kde.StatusNotifierWatcher
-  - --talk-name=org.freedesktop.secrets
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-run/pipewire-0:ro
-  - --own-name=org.mpris.MediaPlayer2.Spotube.*
+- --socket=fallback-x11
+- --socket=wayland
+- --socket=pulseaudio
+- --share=network
+- --share=ipc
+- --device=dri
+- --filesystem=xdg-download
+- --talk-name=org.freedesktop.Notifications
+- --talk-name=org.kde.StatusNotifierWatcher
+- --talk-name=org.freedesktop.secrets
+- --filesystem=xdg-documents
+- --filesystem=xdg-run/pipewire-0:ro
+- --own-name=org.mpris.MediaPlayer2.Spotube.*
 modules:
-  - shared-modules/libappindicator/libappindicator-gtk3-12.10.json
-  - shared-modules/libsecret/libsecret.json
-  - name: libnotify
-    buildsystem: meson
-    config-opts:
-      - -Dtests=false
-      - -Dintrospection=disabled
-      - -Dgtk_doc=false
-      - -Ddocbook_docs=disabled
-    sources:
-      - type: archive
-        url: https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.8.tar.xz
-        sha256: 69209e0b663776a00c7b6c0e560302a8dbf66b2551d55616304f240bba66e18c
-  - name: jsoncpp
-    buildsystem: meson
-    config-opts:
-      - --default-library=shared
-    sources:
-      - type: git
-        url: https://github.com/open-source-parsers/jsoncpp
-        tag: 1.9.5
-  - name: libmpv
+- shared-modules/libappindicator/libappindicator-gtk3-12.10.json
+- shared-modules/libsecret/libsecret.json
+- name: libnotify
+  buildsystem: meson
+  config-opts:
+  - -Dtests=false
+  - -Dintrospection=disabled
+  - -Dgtk_doc=false
+  - -Ddocbook_docs=disabled
+  sources:
+  - type: archive
+    url: https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.8.tar.xz
+    sha256: 69209e0b663776a00c7b6c0e560302a8dbf66b2551d55616304f240bba66e18c
+- name: jsoncpp
+  buildsystem: meson
+  config-opts:
+  - --default-library=shared
+  sources:
+  - type: git
+    url: https://github.com/open-source-parsers/jsoncpp
+    tag: 1.9.5
+- name: libmpv
+  cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/man
+  buildsystem: simple
+  build-commands:
+  - python3 waf configure --prefix=/app --enable-libmpv-shared --disable-cplayer --disable-build-date
+    --disable-alsa
+  - python3 waf build
+  - python3 waf install
+  sources:
+  - type: git
+    url: https://github.com/mpv-player/mpv.git
+    tag: v0.35.1
+  - type: file
+    url: https://waf.io/waf-2.0.25
+    sha256: 21199cd220ccf60434133e1fd2ab8c8e5217c3799199c82722543970dc8e38d5
+    dest-filename: waf
+  modules:
+  - name: libass
     cleanup:
+    - /include
+    - /lib/*.la
+    - /lib/pkgconfig
+    config-opts:
+    - --disable-static
+    sources:
+    - type: archive
+      url: https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.xz
+      sha256: f0da0bbfba476c16ae3e1cfd862256d30915911f7abaa1b16ce62ee653192784
+    modules:
+    - name: fribidi
+      cleanup:
+      - /bin
       - /include
       - /lib/pkgconfig
+      - /lib/*.la
       - /share/man
-    buildsystem: simple
-    build-commands:
-      - python3 waf configure --prefix=/app --enable-libmpv-shared --disable-cplayer
-        --disable-build-date --disable-alsa
-      - python3 waf build
-      - python3 waf install
-    sources:
+      buildsystem: meson
+      config-opts:
+      - --buildtype=release
+      - -Ddocs=false
+      sources:
       - type: git
         url: https://github.com/mpv-player/mpv.git
         tag: v0.35.1
@@ -152,10 +184,10 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.5.0/spotube-linux-3.5.0-x86_64.tar.xz
-        sha256: bb420085e03839fdd3b6f63b778e9d15c8117cb04652b7ec188c98d4ae37281a
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.6.0/spotube-linux-3.6.0-x86_64.tar.xz
+        sha256: ba5fa41fd859571cc53ac3cb01cb49f3931243166b18e13db07031d4493b933e
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
         branch: master
-        commit: 2abb5800be804a0ff42851e6dcab9e25dbb60f1c
+        commit: cb95663412fcc9a829c5657e0160132f13fb0649
