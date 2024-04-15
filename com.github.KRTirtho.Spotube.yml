@@ -158,4 +158,4 @@ modules:
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
         branch: master
-        commit: 2abb5800be804a0ff42851e6dcab9e25dbb60f1c
+        commit: cb95663412fcc9a829c5657e0160132f13fb0649
