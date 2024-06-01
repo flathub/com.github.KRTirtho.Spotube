@@ -166,12 +166,11 @@ modules:
         sources:
           - type: git
             url: https://git.ffmpeg.org/ffmpeg.git
-            branch: release/6.0
-            commit: af1bc3a91f0aef4a2431de5d7c43f03d711cfbd0
+            commit: c185e11321ca8805ba6f4f91fab7afd8918b9ac5
   - name: spotube
     buildsystem: simple
     build-commands:
-      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="3.5.0" date="2024-03-09"
+      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="3.6.0" date="2024-04-15"
         />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
       - install -Dm644 spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
       - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
@@ -189,5 +188,4 @@ modules:
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
-        branch: master
-        commit: cb95663412fcc9a829c5657e0160132f13fb0649
+        tag: v3.6.0
