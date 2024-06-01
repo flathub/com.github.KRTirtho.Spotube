@@ -167,7 +167,6 @@ modules:
           - type: git
             url: https://git.ffmpeg.org/ffmpeg.git
             branch: release/6.0
-            commit: af1bc3a91f0aef4a2431de5d7c43f03d711cfbd0
   - name: spotube
     buildsystem: simple
     build-commands:
@@ -190,4 +189,3 @@ modules:
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
         branch: master
-        commit: cb95663412fcc9a829c5657e0160132f13fb0649
