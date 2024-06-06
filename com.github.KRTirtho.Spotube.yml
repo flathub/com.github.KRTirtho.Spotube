@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/main/data/flatpak-manifest.schema.json
+
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
 runtime-version: '45'
@@ -183,8 +185,8 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.7.1/spotube-linux-3.7.1-x86_64.tar.xz
-        sha256: 9c46d8654cca620dd097708e2ad400a472358ece1cd81106b274b2a81e9b8e19
+        url: https://github.com/KRTirtho/spotube/releases/download/nightly/spotube-linux-nightly-x86_64.tar.xz
+        sha256: 617dfa6b700300b7cb0eefd5288fb943908e9b82465553687a48922dcf8397f8
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
