@@ -186,7 +186,7 @@ modules:
       - type: archive
         dest: spotube
         url: https://github.com/KRTirtho/spotube/releases/download/nightly/spotube-linux-nightly-x86_64.tar.xz
-        sha256: 617dfa6b700300b7cb0eefd5288fb943908e9b82465553687a48922dcf8397f8
+        sha256: 743c61c9235d777513d25c31e4ce654e56b02b48cb6928a4526d211d3ba01adf
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
