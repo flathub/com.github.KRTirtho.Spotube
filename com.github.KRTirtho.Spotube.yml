@@ -1,10 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/main/data/flatpak-manifest.schema.json
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
 runtime-version: '46'
 sdk: org.gnome.Sdk
 command: spotube
 finish-args:
-- --socket=x11
+- --socket=fallback-x11
+- --socket=wayland
 - --socket=pulseaudio
 - --share=network
 - --share=ipc
@@ -12,12 +14,13 @@ finish-args:
 - --filesystem=xdg-download
 - --talk-name=org.freedesktop.Notifications
 - --talk-name=org.freedesktop.secrets
+- --talk-name=org.kde.StatusNotifierWatcher
 - --system-talk-name=org.freedesktop.Avahi.*
 - --filesystem=xdg-documents
 - --filesystem=xdg-run/pipewire-0:ro
 - --own-name=org.mpris.MediaPlayer2.Spotube.*
 modules:
-- libayatana-appindicator3-0.1.yml
+- shared-modules/libappindicator/libappindicator-gtk3-12.10.json
 - shared-modules/libsecret/libsecret.json
 - name: libnotify
   buildsystem: meson
@@ -187,4 +190,5 @@ modules:
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
-        tag: v3.7.1
+        branch: dev
+        # tag: v3.7.1
