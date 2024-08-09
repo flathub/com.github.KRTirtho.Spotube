@@ -190,5 +190,4 @@ modules:
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
-        branch: dev
-        # tag: v3.7.1
+        tag: v3.7.1
