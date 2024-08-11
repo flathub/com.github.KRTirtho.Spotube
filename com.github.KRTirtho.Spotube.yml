@@ -1,6 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/main/data/flatpak-manifest.schema.json
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
-runtime-version: '45'
+runtime-version: '46'
 sdk: org.gnome.Sdk
 command: spotube
 finish-args:
@@ -12,8 +13,8 @@ finish-args:
 - --device=dri
 - --filesystem=xdg-download
 - --talk-name=org.freedesktop.Notifications
-- --talk-name=org.kde.StatusNotifierWatcher
 - --talk-name=org.freedesktop.secrets
+- --talk-name=org.kde.StatusNotifierWatcher
 - --system-talk-name=org.freedesktop.Avahi.*
 - --filesystem=xdg-documents
 - --filesystem=xdg-run/pipewire-0:ro
@@ -184,9 +185,17 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.7.1/spotube-linux-3.7.1-x86_64.tar.xz
-        sha256: 3d53272a1ec74615a59e8b1cd6bd9c879e92ccf20673f0bc127203b8d59a8ae5
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.0/spotube-linux-3.8.0-x86_64.tar.xz
+        sha256: 275071ed30597ca548fa9ee66ec935c7859e65edad25483a2f890ce5804f5a67
+        only-arches:
+          - x86_64
+      - type: archive
+        dest: spotube
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.0/spotube-linux-3.8.0-aarch64.tar.xz
+        sha256: 0024fb462e3ec48695a996d4a8ffee33eaa47020b162df0ae1d4b9796239cb1f
+        only-arches:
+          - aarch64
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
-        tag: v3.7.1
+        tag: v3.8.0
