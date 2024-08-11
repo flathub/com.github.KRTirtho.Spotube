@@ -187,6 +187,14 @@ modules:
         dest: spotube
         url: https://github.com/KRTirtho/spotube/releases/download/v3.8.0/spotube-linux-3.8.0-x86_64.tar.xz
         sha256: 275071ed30597ca548fa9ee66ec935c7859e65edad25483a2f890ce5804f5a67
+        only-arches:
+          - x86_64
+      - type: archive
+        dest: spotube
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.0/spotube-linux-3.8.0-aarch64.tar.xz
+        sha256: 0024fb462e3ec48695a996d4a8ffee33eaa47020b162df0ae1d4b9796239cb1f
+        only-arches:
+          - aarch64
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
