@@ -18,6 +18,7 @@ finish-args:
 - --system-talk-name=org.freedesktop.Avahi.*
 - --filesystem=xdg-documents
 - --filesystem=xdg-run/pipewire-0:ro
+- --filesystem=xdg-run/app/com.discordapp.Discord:create
 - --own-name=org.mpris.MediaPlayer2.spotube.*
 modules:
 - shared-modules/libappindicator/libappindicator-gtk3-12.10.json
