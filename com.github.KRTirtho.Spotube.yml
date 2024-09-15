@@ -183,21 +183,21 @@ modules:
       - cp -R spotube/ /app
       - ln -s /app/spotube/spotube /app/bin/spotube
     sources:
-        - type: archive
-          dest: spotube
-          url: https://github.com/KRTirtho/spotube/releases/download/v3.8.1/spotube-linux-3.8.1-x86_64.tar.xz
-          sha256: 42ed3717ead09fa8b466796ee34ec03e5b60d0414aebfca56d54016ea81faa21
-          only-arches:
-          - x86_64
-        - type: archive
-          dest: spotube
-          url: https://github.com/KRTirtho/spotube/releases/download/v3.8.1/spotube-linux-3.8.1-aarch64.tar.xz
-          sha256: 1f6e72f1c9390fc694883fc6196d21cb754a162349b25f11dce3f48896f83c24
-          only-arches:
-          - aarch64
-        - type: git
-          dest: spotube-src
-          url: https://github.com/KRTirtho/spotube
-          tag: v3.8.1
+      - type: archive
+        dest: spotube
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.1/spotube-linux-3.8.1-x86_64.tar.xz
+        sha256: 42ed3717ead09fa8b466796ee34ec03e5b60d0414aebfca56d54016ea81faa21
+        only-arches:
+        - x86_64
+      - type: archive
+        dest: spotube
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.1/spotube-linux-3.8.1-aarch64.tar.xz
+        sha256: 1f6e72f1c9390fc694883fc6196d21cb754a162349b25f11dce3f48896f83c24
+        only-arches:
+        - aarch64
+      - type: git
+        dest: spotube-src
+        url: https://github.com/KRTirtho/spotube
+        tag: v3.8.1
 
       
