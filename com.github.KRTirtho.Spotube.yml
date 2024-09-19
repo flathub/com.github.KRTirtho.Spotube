@@ -19,7 +19,8 @@ finish-args:
 - --env=GSETTINGS_BACKEND=keyfile
 - --filesystem=xdg-documents
 - --filesystem=xdg-run/pipewire-0:ro
-- --own-name=org.mpris.MediaPlayer2.Spotube.*
+- --filesystem=xdg-run/app/com.discordapp.Discord:create
+- --own-name=org.mpris.MediaPlayer2.spotube.*
 modules:
 - shared-modules/libappindicator/libappindicator-gtk3-12.10.json
 - shared-modules/libsecret/libsecret.json
@@ -186,17 +187,19 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.0/spotube-linux-3.8.0-x86_64.tar.xz
-        sha256: 275071ed30597ca548fa9ee66ec935c7859e65edad25483a2f890ce5804f5a67
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.1/spotube-linux-3.8.1-x86_64.tar.xz
+        sha256: 42ed3717ead09fa8b466796ee34ec03e5b60d0414aebfca56d54016ea81faa21
         only-arches:
           - x86_64
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.0/spotube-linux-3.8.0-aarch64.tar.xz
-        sha256: 0024fb462e3ec48695a996d4a8ffee33eaa47020b162df0ae1d4b9796239cb1f
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.1/spotube-linux-3.8.1-aarch64.tar.xz
+        sha256: 1f6e72f1c9390fc694883fc6196d21cb754a162349b25f11dce3f48896f83c24
         only-arches:
           - aarch64
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
-        tag: v3.8.0
+        tag: v3.8.1
+
+      
