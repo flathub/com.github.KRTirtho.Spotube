@@ -16,6 +16,7 @@ finish-args:
 - --talk-name=org.freedesktop.secrets
 - --talk-name=org.kde.StatusNotifierWatcher
 - --system-talk-name=org.freedesktop.Avahi.*
+- --env=GSETTINGS_BACKEND=keyfile
 - --filesystem=xdg-documents
 - --filesystem=xdg-run/pipewire-0:ro
 - --filesystem=xdg-run/app/com.discordapp.Discord:create
