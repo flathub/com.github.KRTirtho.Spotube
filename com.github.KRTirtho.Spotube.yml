@@ -173,7 +173,7 @@ modules:
   - name: spotube
     buildsystem: simple
     build-commands:
-      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="3.8.3" date="2024-10-09"
+      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="3.9.0" date="2024-12-08"
         />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
       - install -Dm644 spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
       - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
@@ -186,19 +186,19 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.3/spotube-linux-3.8.3-x86_64.tar.xz
-        sha256: 42d1a1c8fa10b547e8c67c54ecae58aee9eecbc80256b106910df0a27b49b2f3
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.9.0/spotube-linux-3.9.0-x86_64.tar.xz
+        sha256: 9798e25ea0600cfae1753cf63fae20da3304c1abdae5f9ffa68d2868aaedf720
         only-arches:
           - x86_64
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.3/spotube-linux-3.8.3-aarch64.tar.xz
-        sha256: 580a66c10d1712d44abf19414bc523cd06fb4af230734758548556029ed5cb0c
+        url: https://github.com/KRTirtho/spotube/releases/download/v3.9.0/spotube-linux-3.9.0-aarch64.tar.xz
+        sha256: 830c2882e44cba44d0b9d1e17399183042d32ae3878bdf3fbc2fd50ceee92cfa
         only-arches:
           - aarch64
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
-        tag: v3.8.3
+        tag: v3.9.0
 
       
