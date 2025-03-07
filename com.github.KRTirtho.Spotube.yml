@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/main/data/flatpak-manifest.schema.json
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
-runtime-version: '46'
+runtime-version: '47'
 sdk: org.gnome.Sdk
 command: spotube
 finish-args:
@@ -34,6 +34,18 @@ modules:
   - type: archive
     url: https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.8.tar.xz
     sha256: 69209e0b663776a00c7b6c0e560302a8dbf66b2551d55616304f240bba66e18c
+- name: yt-dlp
+  no-autogen: true
+  no-make-install: true
+  make-args:
+    - yt-dlp
+    - PYTHON=/usr/bin/python3
+  post-install:
+    - install yt-dlp /app/bin
+  sources:
+    - type: archive
+      url: 'https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2025.02.19.tar.gz'
+      sha256: '3942d04ac56b7cbd51881653946662dc84b8628c9405f9e9bacb29d0259e0ab1'
 - name: jsoncpp
   buildsystem: meson
   config-opts:
@@ -186,14 +198,14 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.3/spotube-linux-3.8.3-x86_64.tar.xz
-        sha256: 42d1a1c8fa10b547e8c67c54ecae58aee9eecbc80256b106910df0a27b49b2f3
+        url: https://github.com/KRTirtho/spotube/releases/download/v4.0.0/spotube-linux-4.0.0-x86_64.tar.xz
+        sha256: 06da27ee97afd3fa71ac1f3a659293cda7c155de76c9ffa29858936b9bdafea5 
         only-arches:
           - x86_64
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v3.8.3/spotube-linux-3.8.3-aarch64.tar.xz
-        sha256: 580a66c10d1712d44abf19414bc523cd06fb4af230734758548556029ed5cb0c
+        url: https://github.com/KRTirtho/spotube/releases/download/v4.0.0/spotube-linux-4.0.0-aarch64.tar.xz
+        sha256: 23c00beaec5d0dd0e41923fe8e2f18d0e1e65ab241e9ecfdd6f3e01e9f05c394
         only-arches:
           - aarch64
       - type: git
