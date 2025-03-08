@@ -146,12 +146,12 @@ modules:
           - type: git
             url: https://code.videolan.org/videolan/x264.git
             commit: 7ed753b10a61d0be95f683289dfb925b800b0676
-            x-checker-data:
-              type: json
-              url: https://code.videolan.org/api/v4/projects/536/repository/commits
-              commit-query: first( .[].id )
-              version-query: first( .[].id )
-              timestamp-query: first( .[].committed_date )
+            # x-checker-data:
+            #   type: json
+            #   url: https://code.videolan.org/api/v4/projects/536/repository/commits
+            #   commit-query: first( .[].id )
+            #   version-query: first( .[].id )
+            #   timestamp-query: first( .[].committed_date )
       - name: nv-codec-headers
         cleanup:
           - '*'
