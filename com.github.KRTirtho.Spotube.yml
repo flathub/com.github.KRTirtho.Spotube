@@ -185,7 +185,7 @@ modules:
   - name: spotube
     buildsystem: simple
     build-commands:
-      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="3.9.0" date="2024-12-08"
+      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="v4.0.0" date="2025-03-07"
         />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
       - install -Dm644 spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
       - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
@@ -211,6 +211,6 @@ modules:
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
-        tag: v3.9.0
+        tag: v4.0.0
 
       
