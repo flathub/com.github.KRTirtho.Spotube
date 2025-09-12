@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/main/data/flatpak-manifest.schema.json
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
-runtime-version: "48"
+runtime-version: '48'
 sdk: org.gnome.Sdk
 command: spotube
 add-build-extensions:
@@ -49,8 +49,8 @@ modules:
       - install yt-dlp /app/bin
     sources:
       - type: archive
-        url: "https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2025.09.05.tar.gz"
-        sha256: "ee27c601e60d703dc3e16f8d6306cbffd2a4dc801e3fa91d6323f496dd8a52ec"
+        url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2025.09.05.tar.gz
+        sha256: ee27c601e60d703dc3e16f8d6306cbffd2a4dc801e3fa91d6323f496dd8a52ec
   - name: jsoncpp
     buildsystem: meson
     config-opts:
@@ -97,8 +97,8 @@ modules:
           - -Ddemos=False
         sources:
           - type: archive
-            url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.349.0/libplacebo-v7.349.0.tar.gz
-            sha256: 79120e685a1836344b51b13b6a5661622486a84e4d4a35f6c8d01679a20fbc86
+            url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.351.0/libplacebo-v7.351.0.tar.gz
+            sha256: 4efe1c8d4da3c61295eb5fdfa50e6037409d8425eb3c15dd86788679c4ce59ee
             x-checker-data:
               type: anitya
               project-id: 20101
@@ -126,8 +126,8 @@ modules:
           - --disable-static
         sources:
           - type: archive
-            url: https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz
-            sha256: da7c348deb6fa6c24507afab2dee7545ba5dd5bbf90a137bfe9e738f7df68537
+            url: https://github.com/libass/libass/releases/download/0.17.4/libass-0.17.4.tar.gz
+            sha256: a886b3b80867f437bc55cff3280a652bfa0d37b43d2aff39ddf3c4f288b8c5a8
             x-checker-data:
               type: anitya
               project-id: 1560
