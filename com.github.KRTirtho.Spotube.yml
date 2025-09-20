@@ -9,6 +9,8 @@ add-build-extensions:
     version: '24.08'
     directory: lib/ffmpeg
     add-ld-path: .
+cleanup-commands:
+  - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
 finish-args:
   - --socket=fallback-x11
   - --socket=wayland
