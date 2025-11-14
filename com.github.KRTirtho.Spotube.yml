@@ -152,14 +152,14 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v5.0.0/spotube-linux-5.0.0-x86_64.tar.xz
-        sha256: 633244efd797f9a123db0e9848dd5242da1af06e2aaa2f85bdc84c687417457c
+        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.0/spotube-linux-5.1.0-x86_64.tar.xz
+        sha256: f832943d81c06ae70b402b74eafd0b5d1c193b61bdec6c4d36f0d0fa7f00cd83
         only-arches:
           - x86_64
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v5.0.0/spotube-linux-5.0.0-aarch64.tar.xz
-        sha256: 2fc00737b87b096b3e4cb8a65dae43c43dad26069b9000e6bde806ef52adaa82
+        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.0/spotube-linux-5.1.0-aarch64.tar.xz
+        sha256: b1ce7a5f6bbf412f30a3f34aa74ebf00260b190fef97adddfc3c3538f97fa640
         only-arches:
           - aarch64
       - type: git
