@@ -29,7 +29,6 @@ finish-args:
   - --own-name=org.mpris.MediaPlayer2.spotube.*
 modules:
   - shared-modules/libappindicator/libappindicator-gtk3-12.10.json
-  - shared-modules/libsecret/libsecret.json
   - name: libnotify
     buildsystem: meson
     config-opts:
