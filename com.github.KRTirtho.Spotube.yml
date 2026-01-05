@@ -121,6 +121,8 @@ modules:
               type: anitya
               project-id: 300234
               url-template: https://github.com/Dav1dde/glad/archive/refs/tags/v$version.tar.gz
+          - type: patch
+            path: 12509c0f1ee8c22ae163017f0a5e7b8a9d983a17.patch
 
       - name: libass
         config-opts:
