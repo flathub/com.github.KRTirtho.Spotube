@@ -133,7 +133,7 @@ modules:
   - name: spotube
     buildsystem: simple
     build-commands:
-      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="v5.1.0" date="2025-11-14"
+      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="v5.1.1" date="2026-02-24"
         />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
       - install -Dm644 spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
       - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
@@ -146,14 +146,14 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.0/spotube-linux-5.1.0-x86_64.tar.xz
-        sha256: f832943d81c06ae70b402b74eafd0b5d1c193b61bdec6c4d36f0d0fa7f00cd83
+        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.1/spotube-linux-5.1.1-x86_64.tar.xz
+        sha256: 3cd70fb0ba9c68787fd81cdd0d3479372288b35020eff65eb39a824293222d96
         only-arches:
           - x86_64
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.0/spotube-linux-5.1.0-aarch64.tar.xz
-        sha256: b1ce7a5f6bbf412f30a3f34aa74ebf00260b190fef97adddfc3c3538f97fa640
+        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.1/spotube-linux-5.1.1-aarch64.tar.xz
+        sha256: f05dab6262fe577a895a5d1005d090182cb041dfbac19b8fc531cf2efbcb4740
         only-arches:
           - aarch64
       - type: git
