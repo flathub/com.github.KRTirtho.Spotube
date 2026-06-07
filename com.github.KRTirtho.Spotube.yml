@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/main/data/flatpak-manifest.schema.json
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
-runtime-version: "48"
+runtime-version: "49"
 sdk: org.gnome.Sdk
 command: spotube
 add-extensions:
@@ -139,7 +139,7 @@ modules:
   - name: spotube
     buildsystem: simple
     build-commands:
-      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="v5.1.1" date="2026-02-24"
+      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="v5.1.2" date="2026-06-05"
         />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
       - install -Dm644 spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
       - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
@@ -152,17 +152,17 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.1/spotube-linux-5.1.1-x86_64.tar.xz
-        sha256: 3cd70fb0ba9c68787fd81cdd0d3479372288b35020eff65eb39a824293222d96
+        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.2/spotube-linux-5.1.2-x86_64.tar.xz
+        sha256: cc04df17e43a8f36447942045cf81f514a0c88aeaa950cb17083510760dd25f5
         only-arches:
           - x86_64
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.1/spotube-linux-5.1.1-aarch64.tar.xz
-        sha256: f05dab6262fe577a895a5d1005d090182cb041dfbac19b8fc531cf2efbcb4740
+        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.2/spotube-linux-5.1.2-aarch64.tar.xz
+        sha256: aba4a987e064c32852fb73a1847a3b77500f6f838e613faeffe4d0ca28b56518
         only-arches:
           - aarch64
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
-        tag: v5.0.0
+        tag: v5.1.2
