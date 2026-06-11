@@ -1,16 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/main/data/flatpak-manifest.schema.json
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
-runtime-version: "48"
+runtime-version: "49"
 sdk: org.gnome.Sdk
 command: spotube
-add-extensions:
-  org.freedesktop.Platform.ffmpeg-full:
-    version: '24.08'
-    directory: lib/ffmpeg
-    add-ld-path: .
-cleanup-commands:
-  - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
 finish-args:
   - --socket=fallback-x11
   - --socket=wayland
@@ -29,7 +22,6 @@ finish-args:
   - --own-name=org.mpris.MediaPlayer2.spotube.*
 modules:
   - shared-modules/libappindicator/libappindicator-gtk3-12.10.json
-  - shared-modules/libsecret/libsecret.json
   - name: libnotify
     buildsystem: meson
     config-opts:
@@ -99,8 +91,8 @@ modules:
           - -Ddemos=False
         sources:
           - type: archive
-            url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.349.0/libplacebo-v7.349.0.tar.gz
-            sha256: 79120e685a1836344b51b13b6a5661622486a84e4d4a35f6c8d01679a20fbc86
+            url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.351.0/libplacebo-v7.351.0.tar.gz
+            sha256: 4efe1c8d4da3c61295eb5fdfa50e6037409d8425eb3c15dd86788679c4ce59ee
             x-checker-data:
               type: anitya
               project-id: 20101
@@ -122,6 +114,8 @@ modules:
               type: anitya
               project-id: 300234
               url-template: https://github.com/Dav1dde/glad/archive/refs/tags/v$version.tar.gz
+          - type: patch
+            path: 12509c0f1ee8c22ae163017f0a5e7b8a9d983a17.patch
 
       - name: libass
         config-opts:
