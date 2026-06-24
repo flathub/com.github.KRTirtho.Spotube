@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/main/data/flatpak-manifest.schema.json
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
-runtime-version: "50"
+runtime-version: '50'
 sdk: org.gnome.Sdk
 command: spotube
 add-extensions:
@@ -67,8 +67,8 @@ modules:
       - install yt-dlp /app/bin
     sources:
       - type: archive
-        url: "https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2026.06.09.tar.gz"
-        sha256: "6add707714c1d9a960cb6f4de1dcbd9fbf857f1bc488d26b43f0701246a06f38"
+        url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2026.06.09.tar.gz
+        sha256: 6add707714c1d9a960cb6f4de1dcbd9fbf857f1bc488d26b43f0701246a06f38
   - name: jsoncpp
     buildsystem: meson
     config-opts:
@@ -97,8 +97,8 @@ modules:
       - -Dvulkan=enabled
     sources:
       - type: archive
-        url: https://github.com/mpv-player/mpv/archive/refs/tags/v0.40.0.tar.gz
-        sha256: 10a0f4654f62140a6dd4d380dcf0bbdbdcf6e697556863dc499c296182f081a3
+        url: https://github.com/mpv-player/mpv/archive/refs/tags/v0.41.0.tar.gz
+        sha256: ee21092a5ee427353392360929dc64645c54479aefdb5babc5cfbb5fad626209
         x-checker-data:
           type: anitya
           project-id: 5348
@@ -144,8 +144,8 @@ modules:
           - --disable-static
         sources:
           - type: archive
-            url: https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz
-            sha256: da7c348deb6fa6c24507afab2dee7545ba5dd5bbf90a137bfe9e738f7df68537
+            url: https://github.com/libass/libass/releases/download/0.17.5/libass-0.17.5.tar.gz
+            sha256: caab4b993dd7be6187c55623b789ed75dddefea6e65938af134637c732fe094a
             x-checker-data:
               type: anitya
               project-id: 1560
