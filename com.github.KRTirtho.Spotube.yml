@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/main/data/flatpak-manifest.schema.json
 app-id: com.github.KRTirtho.Spotube
 runtime: org.gnome.Platform
-runtime-version: "48"
+runtime-version: "50"
 sdk: org.gnome.Sdk
 command: spotube
 add-extensions:
@@ -29,7 +29,23 @@ finish-args:
   - --own-name=org.mpris.MediaPlayer2.spotube.*
 modules:
   - shared-modules/libappindicator/libappindicator-gtk3-12.10.json
-  - shared-modules/libsecret/libsecret.json
+  - name: libsecret
+    buildsystem: meson
+    config-opts:
+      - -Dmanpage=false
+      - -Dvapi=false
+      - -Dgtk_doc=false
+      - -Dintrospection=false
+      - -Dbashcompdir=/app/share/bash-completion/completions
+    cleanup:
+      - /bin
+      - /include
+      - /lib/pkgconfig
+      - /share/man
+    sources:
+      - type: archive
+        url: https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.7.tar.xz
+        sha256: 6b452e4750590a2b5617adc40026f28d2f4903de15f1250e1d1c40bfd68ed55e
   - name: libnotify
     buildsystem: meson
     config-opts:
@@ -51,8 +67,8 @@ modules:
       - install yt-dlp /app/bin
     sources:
       - type: archive
-        url: "https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2025.09.23.tar.gz"
-        sha256: "ba2f0ebf715836a506f54e3062ff1448bfa8314c9db7b8ed7697a26decafdda8"
+        url: "https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2026.06.09.tar.gz"
+        sha256: "6add707714c1d9a960cb6f4de1dcbd9fbf857f1bc488d26b43f0701246a06f38"
   - name: jsoncpp
     buildsystem: meson
     config-opts:
@@ -99,8 +115,8 @@ modules:
           - -Ddemos=False
         sources:
           - type: archive
-            url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.349.0/libplacebo-v7.349.0.tar.gz
-            sha256: 79120e685a1836344b51b13b6a5661622486a84e4d4a35f6c8d01679a20fbc86
+            url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.360.1/libplacebo-v7.360.1.tar.gz
+            sha256: 14c0a99f4b01557ec9826ce6b1d52f6de21be274ba03fd5aab7307f18766dc39
             x-checker-data:
               type: anitya
               project-id: 20101
@@ -139,7 +155,7 @@ modules:
   - name: spotube
     buildsystem: simple
     build-commands:
-      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="v5.1.1" date="2026-02-24"
+      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="v5.1.2" date="2026-06-05"
         />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
       - install -Dm644 spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
       - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
@@ -152,17 +168,17 @@ modules:
     sources:
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.1/spotube-linux-5.1.1-x86_64.tar.xz
-        sha256: 3cd70fb0ba9c68787fd81cdd0d3479372288b35020eff65eb39a824293222d96
+        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.2/spotube-linux-5.1.2-x86_64.tar.xz
+        sha256: cc04df17e43a8f36447942045cf81f514a0c88aeaa950cb17083510760dd25f5
         only-arches:
           - x86_64
       - type: archive
         dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.1/spotube-linux-5.1.1-aarch64.tar.xz
-        sha256: f05dab6262fe577a895a5d1005d090182cb041dfbac19b8fc531cf2efbcb4740
+        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.2/spotube-linux-5.1.2-aarch64.tar.xz
+        sha256: aba4a987e064c32852fb73a1847a3b77500f6f838e613faeffe4d0ca28b56518
         only-arches:
           - aarch64
       - type: git
         dest: spotube-src
         url: https://github.com/KRTirtho/spotube
-        tag: v5.0.0
+        tag: v5.1.2
