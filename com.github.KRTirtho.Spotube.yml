@@ -6,7 +6,7 @@ sdk: org.gnome.Sdk
 command: spotube
 add-extensions:
   org.freedesktop.Platform.ffmpeg-full:
-    version: '24.08'
+    version: '25.08'
     directory: lib/ffmpeg
     add-ld-path: .
 cleanup-commands:
