@@ -4,6 +4,9 @@ runtime: org.gnome.Platform
 runtime-version: '51'
 sdk: org.gnome.Sdk
 command: spotube
+# Flathub keeps the original app ID; the release tarball ships everything as org.spotube.spotube
+rename-desktop-file: org.spotube.spotube.desktop
+rename-icon: org.spotube.spotube
 
 finish-args:
   - --share=ipc
@@ -91,7 +94,12 @@ modules:
       - install -d ${FLATPAK_DEST}/bin
       - ln -s ../lib/spotube/spotube ${FLATPAK_DEST}/bin/spotube
       - cp -a share/. ${FLATPAK_DEST}/share/
+      # Swap upstream's metainfo for the one in this repo (same content, Flathub's app ID)
+      - rm ${FLATPAK_DEST}/share/metainfo/org.spotube.spotube.metainfo.xml
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
     sources:
+      - type: file
+        path: com.github.KRTirtho.Spotube.metainfo.xml
       - type: archive
         only-arches: [x86_64]
         url: https://github.com/team-spotube/spotube/releases/download/v6.0.0/spotube-linux-6.0.0-x86_64.tar.xz
