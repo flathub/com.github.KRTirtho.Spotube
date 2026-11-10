@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.github.KRTirtho.Spotube</id>
+
+  <name>Spotube</name>
+  <summary>Plugin powered, open source music streaming client</summary>
+  <developer id="org.spotube">
+    <name>Team Spotube</name>
+  </developer>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>AGPL-3.0-or-later</project_license>
+
+  <description>
+    <p>
+      A cross-platform, extensible, open source music streaming platform. Bring your own music
+      metadata, playlists and audio sources with plugins made by the community or by yourself.
+    </p>
+    <ul>
+      <li>Plugin powered: supports any platform or custom music service through plugins</li>
+      <li>Community driven plugins for popular platforms, or create your own</li>
+      <li>Freely downloadable tracks with tagged metadata</li>
+      <li>Time synced lyrics regardless of plugin support</li>
+      <li>No telemetry, diagnostics or user data collection</li>
+      <li>Small size, low data usage and native performance</li>
+    </ul>
+  </description>
+
+  <launchable type="desktop-id">com.github.KRTirtho.Spotube.desktop</launchable>
+
+  <categories>
+    <category>AudioVideo</category>
+    <category>Audio</category>
+    <category>Music</category>
+  </categories>
+  <keywords>
+    <keyword>music</keyword>
+    <keyword>streaming</keyword>
+    <keyword>player</keyword>
+    <keyword>lyrics</keyword>
+  </keywords>
+
+  <url type="homepage">https://spotube.cc</url>
+  <url type="bugtracker">https://github.com/team-spotube/spotube/issues</url>
+  <url type="vcs-browser">https://github.com/team-spotube/spotube</url>
+  <url type="donation">https://opencollective.com/spotube</url>
+  <url type="contribute">https://github.com/team-spotube/spotube/blob/master/CONTRIBUTION.md</url>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Browse music from the service your plugin connects to</caption>
+      <image>https://raw.githubusercontent.com/team-spotube/spotube/master/assets/screenshots/home-desktop-dark.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Synced lyrics</caption>
+      <image>https://raw.githubusercontent.com/team-spotube/spotube/master/assets/screenshots/lyrics-desktop-dark.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Your playlists</caption>
+      <image>https://raw.githubusercontent.com/team-spotube/spotube/master/assets/screenshots/playlists-desktop-dark.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Search tracks, albums, artists, playlists and users</caption>
+      <image>https://raw.githubusercontent.com/team-spotube/spotube/master/assets/screenshots/search-desktop-dark.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Local folders and downloads</caption>
+      <image>https://raw.githubusercontent.com/team-spotube/spotube/master/assets/screenshots/local-tracks-desktop-dark.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Group Jam rooms</caption>
+      <image>https://raw.githubusercontent.com/team-spotube/spotube/master/assets/screenshots/group-jam-desktop-dark.png</image>
+    </screenshot>
+  </screenshots>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#84b2ff</color>
+    <color type="primary" scheme_preference="dark">#01185c</color>
+  </branding>
+
+  <content_rating type="oars-1.1" />
+
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+
+  <releases>
+    <release version="6.0.0" date="2026-11-09">
+      <url type="details">https://github.com/team-spotube/spotube/releases/tag/v6.0.0</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>jam: Replace MQTT with a Durable Object room server and synced playback</li>
+          <li>jam: Harden the room server, add device bans and friendly names</li>
+          <li>ios: Play audio with VLCKit instead of AVPlayer</li>
+          <li>ios: Drop AVPlayer-era streaming format restrictions</li>
+          <li>Add iOS background playback support (#3170)</li>
+          <li>update: Compare app releases with full SemVer</li>
+          <li>plugins: Redesign the plugin manager</li>
+          <li>plugins: Limit WebView cookie and script access to declared domains</li>
+          <li>plugins: Download the public suffix list daily instead of bundling it</li>
+          <li>plugins: Enhance built-in plugin handling and add removal option for user-installed plugins</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>android: Use desugar_jdk_libs_nio so URLEncoder.encode(String, Charset) is backported on API &lt; 33</li>
+          <li>flatpak: Grant the Wayland socket so the webview doesn&#39;t render black</li>
+          <li>jam: Keep guests on the host&#39;s recording across song changes</li>
+          <li>desktop: Stop non-composable string lookups from querying the system theme</li>
+          <li>Stop memory blow-ups and crashes with large lists and local media</li>
+          <li>ios: Use MobileVLCKit from CocoaPods instead of a git Swift package</li>
+          <li>Crash at startup from a Koin cycle in DeviceAudioPlayerQueue</li>
+          <li>Update default Jam server URL to new endpoint</li>
+          <li>linux: Bundle libselinux in the AppImage</li>
+          <li>artist: Play the tapped top track instead of the first one</li>
+          <li>welcome: Keep step tabs and pages readable on narrow windows</li>
+          <li>plugins: Keep public suffix list updates off the startup and call paths</li>
+        </ul>
+      </description>
+    </release>
+    <release version="5.1.1" date="2026-02-24">
+      <url type="details">https://github.com/team-spotube/spotube/releases/tag/v5.1.1</url>
+      <description>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Upgrade NewPipeExtractor to latest version fixinng playback issue</li>
+          <li>android: Build not working due to</li>
+          <li>Lyrics not working</li>
+        </ul>
+      </description>
+    </release>
+    <release version="5.1.0" date="2025-11-14">
+      <url type="details">https://github.com/team-spotube/spotube/releases/tag/v5.1.0</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>Show plugin source and set the only plugin as default if no plugin is there</li>
+          <li>playback: Add dab music source</li>
+          <li>playback: Add uncompressed flac playback support</li>
+          <li>Add plugin audio source models and api service</li>
+          <li>plugins: Filter plugins by abilities in plugins page and show abilities as badge</li>
+          <li>Add setting default audio source support</li>
+          <li>Move away from track source query and preferences audio quality and codec</li>
+          <li>Add NewPipe support for desktop platforms</li>
+          <li>Add default plugin loading capability</li>
+          <li>queue: Add multi-select and bulk actions to queue (#2839)</li>
+          <li>android: Add 16KB page size support</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Change plugin download directory to application support</li>
+          <li>playback: Play next not working</li>
+          <li>Upgrade NewPipeExtractor to avoid unplayable streams</li>
+          <li>Jiosaavn not working due to json signature change</li>
+          <li>Streaming not working</li>
+          <li>Quality preset initialization fails and audio source auth</li>
+          <li>Selection preset quality returning null</li>
+          <li>Downloaded tracks are not tagged with metadata</li>
+          <li>Download not working in different devices and slow</li>
+          <li>playback: Use stream instead of chunked serving of audio bytes</li>
+        </ul>
+      </description>
+    </release>
+    <release version="5.0.0" date="2025-09-11">
+      <url type="details">https://github.com/team-spotube/spotube/releases/tag/v5.0.0</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>Add ISRC track search for YouTube (#2594)</li>
+          <li>Add new icons #2676 by @alexio-dev (#2678)</li>
+          <li>Add connect confirmation dialog</li>
+          <li>Add metadata api service and models</li>
+          <li>metadata-plugin: Add pagination support, feed and playlist CRUD endpoints</li>
+          <li>metadata-plugin: Add local storage api</li>
+          <li>Add webviiew, totp and setInterval  apis for plugins</li>
+          <li>Enhance local storage and webview APIs with improved error handling and resource management</li>
+          <li>metadata_plugin: Add logout method</li>
+          <li>Update plugin configuration with more fields</li>
+          <li>Implement metadata plugins based on hetu</li>
+          <li>Update models to match hetu_spotube_plugin signature</li>
+          <li>Add user endpoint calls in metadata and paginated async notifiers</li>
+          <li>Add playlist endpoint and providers</li>
+          <li>Add albums metadata endpoint and provider</li>
+          <li>Add artist and album providers</li>
+          <li>Add track endpoint for metadata service</li>
+          <li>Remove green corp names formally</li>
+          <li>metadata: Add plugin form</li>
+          <li>Add support for entity specific search</li>
+          <li>Enhance image handling</li>
+          <li>Add support for automatic plugin repository from github and codeberg</li>
+          <li>Use isolate for youtube_explode engine</li>
+          <li>Add repository and plugin API version fields to metadata plugins</li>
+          <li>Update new pipe version</li>
+          <li>metadata: Add plugin update checker and dialog for available updates</li>
+          <li>Optimize track options and related artists</li>
+          <li>Add plugin scrobbling support and support button</li>
+          <li>Enhance markdown configuration and styling with rehype plugins and update global styles</li>
+          <li>Add ErrorBox and NoDefaultMetadataPlugin components</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Calling /track/:streamId endpoint causes active sourced track to be anything</li>
+          <li>mobile: Dialogs in bottom sheet are not opening</li>
+          <li>Default accent color in orange but it shows blue in settings</li>
+          <li>Artist images are not loading up</li>
+          <li>Remote path traversal through websocket  when devices are on same network</li>
+          <li>Endless playback not working</li>
+          <li>android: NewPipe invalid search content filters</li>
+          <li>Make YoutubeExplode engine faster</li>
+          <li>Create and delete playlist not working</li>
+          <li>Local track not working and images of local not showing up</li>
+          <li>Use plugin author and name as slug</li>
+          <li>Local playback not working for tracks with special # (hashtag) characters</li>
+          <li>Inaccessible streaming url causing rapid skips</li>
+          <li>yt: Fallback to different search result if all streaming url is inaccessible</li>
+          <li>playback: Skip network requests if cached file already exists</li>
+          <li>Yt-dlp playback not working and add partial support for HLS streaming</li>
+          <li>Windows webview2 environment permission issue</li>
+          <li>playback: Play not fetching full playlist if playlist is too long</li>
+          <li>track_options: Tapping on option doesn&#39;t close the menu</li>
+          <li>playback: Alternative track sources switch not working</li>
+          <li>ui: Lyrics white text in white background and small player buttons</li>
+        </ul>
+        <p>Translation</p>
+        <ul>
+          <li>Add Traditional Chinese translation (#2762)</li>
+          <li>Fix Japanese translations (#2732)</li>
+          <li>Correction of the dutch language  (#1306)</li>
+        </ul>
+      </description>
+    </release>
+    <release version="4.0.2" date="2025-03-16">
+      <url type="details">https://github.com/team-spotube/spotube/releases/tag/v4.0.2</url>
+      <description>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Invalid access token exception #2525</li>
+        </ul>
+      </description>
+    </release>
+    <release version="4.0.1" date="2025-03-15">
+      <url type="details">https://github.com/team-spotube/spotube/releases/tag/v4.0.1</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>local_library: Add support for x-flac, opus and x-wav</li>
+          <li>translation: Add tagalog language support</li>
+          <li>translation: Add tamil translation for spotube (#2501)</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>android: Navigation overlaying in app navigation</li>
+          <li>Add to playlist not working in smaller screen devices</li>
+          <li>Language picker search broken</li>
+          <li>generate_playlist: Create playlist not adding tracks nor navigating to playlist page</li>
+          <li>desktop: Double titlebar in local library folders  and massive space in overlay player</li>
+          <li>Lastfm form broken in other locales #2447</li>
+          <li>Spotify login broken due to new totp requirement #2494</li>
+          <li>Spotify authentication 429 errors</li>
+        </ul>
+      </description>
+    </release>
+    <release version="4.0.0" date="2025-03-07">
+      <url type="details">https://github.com/team-spotube/spotube/releases/tag/v4.0.0</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>android: Home widget support (#2148)</li>
+          <li>Initial integration of shadcn-ui</li>
+          <li>Grid/list customizable playbutton view</li>
+          <li>Flag to hide spotify generated images with patterns</li>
+          <li>Show placeholder images where there is no item or on empty page</li>
+          <li>Pause playback when no internet connection</li>
+          <li>Implement yt-dlp for desktop and NewPipeExtractor for Android (#2316)</li>
+          <li>Custom  piped &amp; invidious instance support</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>No spacing from the ads</li>
+          <li>Finally fix gradle build</li>
+          <li>ios: Downloads not working due to permission errors (#2180)</li>
+          <li>Mobile keyboard overflow</li>
+          <li>SafeArea for global bottom items not working</li>
+          <li>SafeArea not working for bottom floating widgets</li>
+          <li>Youtube video unplayable issue and use more ytClients</li>
+          <li>Remove automaticallyImplyLeading from root tabs</li>
+          <li>android: Back button and safe area issues</li>
+          <li>Duplicates in recent section</li>
+          <li>Youtube source taking too long to buffer</li>
+          <li>Youtube tracks keeps skipping despite being matched correctly</li>
+          <li>Follow artist not working #2057</li>
+          <li>Youtube_explode_dart failing for many videos due to youtube ios client visitor data change</li>
+          <li>Piped api not working</li>
+        </ul>
+      </description>
+    </release>
+    <release version="3.9.0" date="2024-12-08">
+      <url type="details">https://github.com/team-spotube/spotube/releases/tag/v3.9.0</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>Add invidious audio source and fix auto skipping tracks (#2005)</li>
+          <li>Track caching and cached track export support (#2117)</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>UI glitch when loading more user artists and albums</li>
+          <li>Selecting an Alternative Track Source removes the current song from the queue #2039</li>
+          <li>mobile: Ensure audio session is activated when playback is resumed after interruption #2092</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+</component>
