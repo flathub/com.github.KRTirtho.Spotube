@@ -1,184 +1,129 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/flatpak/flatpak-builder/main/data/flatpak-manifest.schema.json
-app-id: com.github.KRTirtho.Spotube
+id: com.github.KRTirtho.Spotube
+# GTK 3 and WebKitGTK 4.1 (the webview) come from the GNOME runtime
 runtime: org.gnome.Platform
-runtime-version: "50"
+runtime-version: '51'
 sdk: org.gnome.Sdk
 command: spotube
-add-extensions:
-  org.freedesktop.Platform.ffmpeg-full:
-    version: '25.08'
-    directory: lib/ffmpeg
-    add-ld-path: .
-cleanup-commands:
-  - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
-finish-args:
-  - --socket=fallback-x11
-  - --socket=wayland
-  - --socket=pulseaudio
-  - --share=network
-  - --share=ipc
-  - --device=dri
-  - --filesystem=xdg-download
-  - --talk-name=org.freedesktop.Notifications
-  - --talk-name=org.freedesktop.secrets
-  - --talk-name=org.kde.StatusNotifierWatcher
-  - --system-talk-name=org.freedesktop.Avahi.*
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-run/pipewire-0:ro
-  - --filesystem=xdg-run/app/com.discordapp.Discord:create
-  - --own-name=org.mpris.MediaPlayer2.spotube.*
-modules:
-  - shared-modules/libappindicator/libappindicator-gtk3-12.10.json
-  - name: libsecret
-    buildsystem: meson
-    config-opts:
-      - -Dmanpage=false
-      - -Dvapi=false
-      - -Dgtk_doc=false
-      - -Dintrospection=false
-      - -Dbashcompdir=/app/share/bash-completion/completions
-    cleanup:
-      - /bin
-      - /include
-      - /lib/pkgconfig
-      - /share/man
-    sources:
-      - type: archive
-        url: https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.7.tar.xz
-        sha256: 6b452e4750590a2b5617adc40026f28d2f4903de15f1250e1d1c40bfd68ed55e
-  - name: libnotify
-    buildsystem: meson
-    config-opts:
-      - -Dtests=false
-      - -Dintrospection=disabled
-      - -Dgtk_doc=false
-      - -Ddocbook_docs=disabled
-    sources:
-      - type: archive
-        url: https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.8.tar.xz
-        sha256: 69209e0b663776a00c7b6c0e560302a8dbf66b2551d55616304f240bba66e18c
-  - name: yt-dlp
-    no-autogen: true
-    no-make-install: true
-    make-args:
-      - yt-dlp
-      - PYTHON=/usr/bin/python3
-    post-install:
-      - install yt-dlp /app/bin
-    sources:
-      - type: archive
-        url: "https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2026.06.09.tar.gz"
-        sha256: "6add707714c1d9a960cb6f4de1dcbd9fbf857f1bc488d26b43f0701246a06f38"
-  - name: jsoncpp
-    buildsystem: meson
-    config-opts:
-      - --default-library=shared
-    sources:
-      - type: git
-        url: https://github.com/open-source-parsers/jsoncpp
-        tag: 1.9.5
+# Flathub keeps the original app ID; the release tarball ships everything as org.spotube.spotube
+rename-desktop-file: org.spotube.spotube.desktop
+rename-icon: org.spotube.spotube
 
-  - name: libmpv
-    cleanup:
-      - /share/bash-completion
-      - /share/zsh
-      - /share/doc
-      - /share/icons
-      - /share/applications
-    buildsystem: meson
+finish-args:
+  - --share=ipc
+  - --share=network
+  # The window is a Tao (Wayland/X11) one, so Wayland is used natively and X11 only as a fallback
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --device=dri
+  # Downloaded tracks go to ~/Downloads/Spotube; local tracks are scanned from ~/Music and ~/Downloads
+  - --filesystem=xdg-download
+  - --filesystem=xdg-music:ro
+  # Tray icon (StatusNotifierItem). The tray library registers as org.kde.StatusNotifierItem-<pid>-1,
+  # and the app is always PID 2 in the sandbox; without owning that name the icon dies on first click.
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --own-name=org.kde.StatusNotifierItem-2-1
+  # Media keys and the desktop's now-playing controls (MPRIS; the name comes from the app's own ID)
+  - --own-name=org.mpris.MediaPlayer2.org.spotube.spotube
+  # Discord Rich Presence: the IPC socket of native Discord, Flatpak Discord and Flatpak Vesktop
+  - --filesystem=xdg-run/discord-ipc-0
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create
+  - --filesystem=xdg-run/app/dev.vencord.Vesktop:create
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/man
+  - /share/doc
+  - '*.la'
+  - '*.a'
+
+modules:
+  # libvlc for vlcj (the audio player). Audio only: no video outputs, UI or Lua; decoding and demuxing
+  # go through the runtime's FFmpeg (proprietary codecs come from the auto-installed codecs-extra extension).
+  - name: vlc
+    build-options:
+      env:
+        # configure looks for a c99/c11 wrapper for its build-time tools
+        BUILDCC: gcc -std=gnu11
     config-opts:
-      - -Dlibmpv=true
-      - -Dcplayer=false
-      - -Dlua=disabled
-      - -Ddebug=false
-      - -Dbuild-date=false
-      - -Dalsa=disabled
-      - -Dmanpage-build=disabled
-      - -Dvulkan=enabled
+      - --disable-vlc
+      - --disable-qt
+      - --disable-skins2
+      - --disable-ncurses
+      - --disable-lua
+      - --disable-a52
+      - --disable-dbus
+      - --disable-xcb
+      - --disable-xvideo
+      - --disable-wayland
+      - --disable-vdpau
+      - --disable-libva
+      - --disable-gles2
+      - --disable-sdl-image
+      - --disable-chromecast
+      - --disable-udev
+      - --disable-v4l2
+      - --disable-dc1394
+      - --disable-dv1394
+      - --disable-linsys
+      - --disable-dvbpsi
+      - --disable-bluray
+      - --disable-dvdread
+      - --disable-dvdnav
+      - --disable-vcd
+      - --disable-libcddb
+      - --disable-screen
+      - --disable-addonmanagermodules
+      - --disable-update-check
+    cleanup:
+      - /share/applications
+      - /share/icons
+      - /share/kde4
+      - /share/metainfo
+      - /share/solid
+      - /share/vlc
     sources:
       - type: archive
-        url: https://github.com/mpv-player/mpv/archive/refs/tags/v0.40.0.tar.gz
-        sha256: 10a0f4654f62140a6dd4d380dcf0bbdbdcf6e697556863dc499c296182f081a3
+        url: https://download.videolan.org/pub/videolan/vlc/3.0.24/vlc-3.0.24.tar.xz
+        sha256: e7cab503d1d7d5849b89d2cf0e1ee60d0ef6d012407791b644b9cfc0cc225fdf
         x-checker-data:
           type: anitya
-          project-id: 5348
+          project-id: 6504
           stable-only: true
-          url-template: https://github.com/mpv-player/mpv/archive/refs/tags/v$version.tar.gz
-    modules:
-      - name: libplacebo
-        buildsystem: meson
-        config-opts:
-          - -Dopengl=enabled
-          - -Dvulkan=enabled
-          - -Dglslang=disabled
-          - -Dd3d11=disabled
-          - -Ddemos=False
-        sources:
-          - type: archive
-            url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.360.1/libplacebo-v7.360.1.tar.gz
-            sha256: 14c0a99f4b01557ec9826ce6b1d52f6de21be274ba03fd5aab7307f18766dc39
-            x-checker-data:
-              type: anitya
-              project-id: 20101
-              stable-only: true
-              url-template: https://code.videolan.org/videolan/libplacebo/-/archive/v$version/libplacebo-v$version.tar.gz
-          - type: archive
-            url: https://github.com/pallets/jinja/archive/refs/tags/3.1.6.tar.gz
-            sha256: 2074b22a72caa65474902234b320d73463d6d4c223ee49f4b433495758356337
-            dest: 3rdparty/jinja
-            x-checker-data:
-              type: anitya
-              project-id: 3894
-              url-template: https://github.com/pallets/jinja/archive/refs/tags/$version.tar.gz
-          - type: archive
-            url: https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.8.tar.gz
-            sha256: 44f06f9195427c7017f5028d0894f57eb216b0a8f7c4eda7ce883732aeb2d0fc
-            dest: 3rdparty/glad
-            x-checker-data:
-              type: anitya
-              project-id: 300234
-              url-template: https://github.com/Dav1dde/glad/archive/refs/tags/v$version.tar.gz
+          versions: {<: '4.0'}
+          url-template: https://download.videolan.org/pub/videolan/vlc/$version/vlc-$version.tar.xz
 
-      - name: libass
-        config-opts:
-          - --disable-static
-        sources:
-          - type: archive
-            url: https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz
-            sha256: da7c348deb6fa6c24507afab2dee7545ba5dd5bbf90a137bfe9e738f7df68537
-            x-checker-data:
-              type: anitya
-              project-id: 1560
-              stable-only: true
-              url-template: https://github.com/libass/libass/releases/download/$version/libass-$version.tar.gz
-
+  # The GraalVM native image, repackaged from the release tarball (packaging/package-linux-tarball.sh)
   - name: spotube
     buildsystem: simple
     build-commands:
-      - sed -i 's|%{{APPDATA_RELEASE}}%|<release version="v5.1.2" date="2026-06-05"
-        />|' spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml
-      - install -Dm644 spotube-src/linux/com.github.KRTirtho.Spotube.appdata.xml /app/share/appdata/com.github.KRTirtho.Spotube.appdata.xml
-      - desktop-file-edit spotube/spotube.desktop --set-key=Exec --set-value="spotube
-        %u" --set-icon=com.github.KRTirtho.Spotube
-      - install -Dm644 spotube/spotube-logo.png /app/share/icons/hicolor/128x128/apps/com.github.KRTirtho.Spotube.png
-      - install -Dm644 spotube/spotube.desktop /app/share/applications/com.github.KRTirtho.Spotube.desktop
-      - install -dm755 /app/bin /app/spotube
-      - cp -R spotube/ /app
-      - ln -s /app/spotube/spotube /app/bin/spotube
+      - cp -a app ${FLATPAK_DEST}/lib/spotube
+      - install -d ${FLATPAK_DEST}/bin
+      - ln -s ../lib/spotube/spotube ${FLATPAK_DEST}/bin/spotube
+      - cp -a share/. ${FLATPAK_DEST}/share/
+      # Swap upstream's metainfo for the one in this repo (same content, Flathub's app ID)
+      - rm ${FLATPAK_DEST}/share/metainfo/org.spotube.spotube.metainfo.xml
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
     sources:
+      - type: file
+        path: com.github.KRTirtho.Spotube.metainfo.xml
       - type: archive
-        dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.2/spotube-linux-5.1.2-x86_64.tar.xz
-        sha256: cc04df17e43a8f36447942045cf81f514a0c88aeaa950cb17083510760dd25f5
-        only-arches:
-          - x86_64
+        only-arches: [x86_64]
+        url: https://github.com/team-spotube/spotube/releases/download/v6.0.0/spotube-linux-6.0.0-x86_64.tar.xz
+        sha256: 460ef44cf50de638e8ecdaf5a7fad1bc7f81cf2dd276d8794eea341726595e7d
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/team-spotube/spotube/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: '"https://github.com/team-spotube/spotube/releases/download/v" + $version + "/spotube-linux-" + $version + "-x86_64.tar.xz"'
+          is-main-source: true
       - type: archive
-        dest: spotube
-        url: https://github.com/KRTirtho/spotube/releases/download/v5.1.2/spotube-linux-5.1.2-aarch64.tar.xz
-        sha256: aba4a987e064c32852fb73a1847a3b77500f6f838e613faeffe4d0ca28b56518
-        only-arches:
-          - aarch64
-      - type: git
-        dest: spotube-src
-        url: https://github.com/KRTirtho/spotube
-        tag: v5.1.2
+        only-arches: [aarch64]
+        url: https://github.com/team-spotube/spotube/releases/download/v6.0.0/spotube-linux-6.0.0-aarch64.tar.xz
+        sha256: 7525d019e67fce222ae2bb3aec34c8764dcd7569e6df0740e15dc6b9641ced77
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/team-spotube/spotube/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: '"https://github.com/team-spotube/spotube/releases/download/v" + $version + "/spotube-linux-" + $version + "-aarch64.tar.xz"'
